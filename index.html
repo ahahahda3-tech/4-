@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating Marketing Plan</title>
+    <style>
+        /* --- Базовые сбросы и переменные --- */
+        :root {
+            --primary-color: #f1c40f; 
+            --dark-color: #111111;    
+            --light-bg: #f9f9f9;      
+            --text-muted: #666666;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #ffffff;
+            color: var(--dark-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .animate-fade {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .animate-slide {
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Задержки для поочередного появления (Stagger эффект) */
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s;}
+        .delay-5 { animation-delay: 1s;}
+        .delay-6 {animation-delay: 1.2s;}
+
+        
+        .hero {
+            background-color: var(--dark-color);
+            color: #ffffff;
+            padding: 120px 0 180px 0; /* Большой отступ снизу для наплыва карточек */
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            font-size: 14px;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+            border-radius: 4px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.15;
+            max-width: 850px;
+            margin: 0 auto 24px;
+            letter-spacing: -1px;   
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #cccccc;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 40px;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255,255,255,0.1);
+        }
+
+        
+        .services {
+            padding-bottom: 100px;
+            background-color: var(--light-bg);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: -100px; /* Сдвиг вверх, перекрывающий темную секцию */
+            position: relative;
+            z-index: 10;
+        }
+
+        .service-card {
+            background-color: #ffffff;
+            padding: 50px 40px;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            border-top: 5px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            border-top-color: var(--primary-color);
+        }
+
+        .card-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #e0e0e0;
+            line-height: 1;
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .card-number {
+            color: var(--primary-color);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 24px;
+        }
+
+        .card-link {
+            color: var(--dark-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 14px;
+            text-decoration: none;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-link::after {
+            content: "→";
+            transition: var(--transition);
+        }
+
+        .service-card:hover .card-link::after {
+            transform: translateX(5px);
+        }
+
+        
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 2.8rem; }
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                margin-top: -60px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding: 80px 0 140px 0; }
+            .hero h1 { font-size: 2.2rem; }
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .service-card { padding: 40px 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    
+    <section class="hero">
+        <div class="container">
+            <span class="hero-badge animate-fade">Бизнес стратегия</span>
+            <h1 class="animate-slide delay-1">делать деньги</h1>
+            <p class="animate-slide delay-2">Мы помогаем компаниям проиграть все деньги </p>
+            <div class="animate-slide delay-3">
+                <a href="#" class="btn btn-primary">Начать проигрывать 
+                </a>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="services">
+        <div class="container">
+            <div class="services-grid">
+                
+                
+                <div class="service-card animate-slide delay-1">
+                    <div class="card-number">01</div>
+                    <h3>Анализ рынка</h3>
+                    <p>Исследуем нишу, оцениваем объемы спроса, выявляем скрытые тренды и формируем портрет идеального клиента.</p>
+                    <a href="#" class="card-link">Подробнее</a>
+                </div>
+
+                
+                <div class="service-card animate-slide delay-2">
+                    <div class="card-number">02</div>
+                    <h3>Аудит конкурентов</h3>
+                    <p>Разбираем сильные и слабые стороны ключевых игроков, их рекламные связки и ценовые стратегии.</p>
+                    <a href="#" class="card-link">Подробнее</a>
+                </div>
+
+                
+                <div class="service-card animate-slide delay-3">
+                    <div class="card-number">03</div>
+                    <h3>Пошаговый план</h3>
+                    <p>Разрабатываем детальную дорожную карту продвижения с фиксацией дедлайнов, KPI и зон ответственности.</p>
+                    <a href="#" class="card-link">Подробнее</a>
+                </div>
+                
+                <div class="service-card animate-slide delay-4">
+                    <div class="card-number">04</div>
+                    <h3>...</h3>
+                    <p>не придумал</p>
+                    <a href="#" class="card-link">Подробнее</a>
+                </div>
+
+                
+                <div class="service-card animate-slide delay-5">
+                    <div class="card-number">05</div>
+                    <h3>...</h3>
+                    <p>a[a[a[a[[a[a[a[</p>
+                    <a href="#" class="card-link">Подробнее</a>
+                </div>
+
+                
+                <div class="service-card animate-slide delay-6">
+                    <div class="card-number">06</div>
+                    <h3>a]a</h3>
+                    <p></p>
+                    <a href="#" class="card-link">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
